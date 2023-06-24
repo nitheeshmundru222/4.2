@@ -1,0 +1,259 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container">
+      <a class="navbar-brand" href="#">Nfl Players</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="buttons mt-5">
+        
+        
+       </div>
+       
+
+
+      </div>
+    </div>
+  </nav>
+
+
+<div class="container mt-5">
+
+  <div class="row">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      New
+     </button>
+      
+      <div class="col-md-12 mx-auto">
+        <h3 class="text-center mb-3">Added Players</h3>
+          <div class="card shadow-lg">
+              <div class="card-body">
+                <table #dataTable class="table table-striped table-hover" >
+                  <thead>
+                    <tr>
+                     
+                      <th scope="col">Names</th>
+                      <th scope="col">Rushing Yards</th>
+                      <th scope="col">Touchdowns</th>
+                      <th scope="col">Sacks</th>
+                      <th scope="col">Made Goals</th>
+                      <th scope="col">Missed Goals</th>
+                      <th scope="col">Catches Made</th>
+                      <th scope="col" class="px-3">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    
+                   <tr *ngFor="let p of allPlayers">
+                    
+                     
+                      <td scope="col" class="text-center">{{p.name}}</td>
+                      <td scope="col" class="text-center">{{p.rushing_yards}}</td>
+                      <td scope="col" class="text-center">{{p.touchdowns}}</td>
+                      <td scope="col" class="text-center" >{{p.sacks}}</td>
+                      <td scope="col" class="text-center" >{{p.made_goals}}</td>
+                      <td scope="col" class="text-center">{{p.missed_goals}}</td>
+                      <td scope="col" class="text-center">{{p.catches_made}}</td>
+                      <td scope="col"> <a href=" "  (click)="editPlayer(p)" class="btn  btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                        <i class="fa fa-edit">Edit</i></a></td>
+                        <td scope="col"> <a href="" (click)="deletePlayerById(p)" class="btn  btn-sm btn-danger">
+                          <i class="fa fa-edit ">Delete</i></a></td>
+
+
+
+                   </tr>
+                  </tbody>
+                </table>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="container mt-5" >
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <select (change)='selectQuery($event)'class="form-select" aria-label="Default select example">
+            <option selected>Choose Query to Run</option>
+            <option value="1">The Player with the most touchdown passes</option>
+            <option value="2">The Player with the most rushing yards</option>
+            <option value="3">The Player with the least rushing yards</option>
+            <option value="4">A list of players sorted from most to fewest field goals made</option>
+            <option value="5">The Player with the most number of sacks.</option>
+          </select>
+        </div>
+      </div>
+
+      <p><span>You selected: </span><b>{{selectedQuery}}</b></p>
+ 
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">New Player</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput"  [(ngModel)]="name" name="name">
+                <label for="floatingInput">Names</label>
+              </div>
+           
+            </div>
+          
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group form-floating mb-3">
+                <input type="number" class="form-control" id="floatingInput" [(ngModel)]="rushing_yards" name="rushing_yards">
+                <label for="floatingInput">Rushing Yards</label>
+              </div>
+           
+            </div>
+            <div class="col-md-4">
+              <div class="form-group form-floating mb-3">
+                <input type="number" class="form-control" id="floatingInput" [(ngModel)]="touchdowns" name="touchdowns">
+                <label for="floatingInput">TouchDowns</label>
+              </div>
+           
+            </div>
+            <div class="col-md-4">
+              <div class="form-group form-floating mb-3">
+                <input type="number" class="form-control" id="floatingInput" [(ngModel)]="sacks" name="sacks">
+                <label for="floatingInput">Sacks</label>
+              </div>
+           
+            </div>
+          </div>
+      
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group form-floating mb-3">
+                <input type="number" class="form-control" id="floatingInput" [(ngModel)]="made_goals" name="made_goals">
+                <label for="floatingInput">Made Goals</label>
+              </div>
+           
+            </div>
+            <div class="col-md-4">
+              <div class="form-group form-floating mb-3">
+                <input type="number" class="form-control" id="floatingInput" [(ngModel)]="missed_goals" name="missed_goals">
+                <label for="floatingInput">Missed Goals</label>
+              </div>
+           
+            </div>
+            <div class="col-md-4">
+              <div class="form-group form-floating mb-3">
+                <input type="number" class="form-control" id="floatingInput" [(ngModel)]="catches_made" name="catches_made">
+                <label for="floatingInput">Catches Made</label>
+              </div>
+           
+            </div>
+          </div>
+
+        
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="createPlayer()">Save</button>
+      </div>
+ 
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Player</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput"  [(ngModel)]="name" name="name">
+                <label for="floatingInput">Names</label>
+              </div>
+           
+            </div>
+          
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group form-floating mb-3">
+                <input type="number" class="form-control" id="floatingInput" [(ngModel)]="rushing_yards" name="rushing_yards">
+                <label for="floatingInput">Rushing Yards</label>
+              </div>
+           
+            </div>
+            <div class="col-md-4">
+              <div class="form-group form-floating mb-3">
+                <input type="number" class="form-control" id="floatingInput" [(ngModel)]="touchdowns" name="touchdowns">
+                <label for="floatingInput">TouchDowns</label>
+              </div>
+           
+            </div>
+            <div class="col-md-4">
+              <div class="form-group form-floating mb-3">
+                <input type="number" class="form-control" id="floatingInput" [(ngModel)]="sacks" name="sacks">
+                <label for="floatingInput">Sacks</label>
+              </div>
+           
+            </div>
+          </div>
+      
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group form-floating mb-3">
+                <input type="number" class="form-control" id="floatingInput" [(ngModel)]="made_goals" name="made_goals">
+                <label for="floatingInput">Made Goals</label>
+              </div>
+           
+            </div>
+            <div class="col-md-4">
+              <div class="form-group form-floating mb-3">
+                <input type="number" class="form-control" id="floatingInput" [(ngModel)]="missed_goals" name="missed_goals">
+                <label for="floatingInput">Missed Goals</label>
+              </div>
+           
+            </div>
+            <div class="col-md-4">
+              <div class="form-group form-floating mb-3">
+                <input type="number" class="form-control" id="floatingInput" [(ngModel)]="catches_made"  name="catches_made" >
+                <label for="floatingInput">Catches Made</label>
+              </div>
+           
+            </div>
+          </div>
+
+       
+    
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="updatePlayer()">Update</button>
+      </div>
+ 
+    </div>
+  </div>
+</div>
+
